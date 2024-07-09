@@ -1,5 +1,11 @@
 ---
+- name: playbook_update_and_upgrade_ubuntu.
+  hosts: localhost
+  become: true
 
+  tasks:
+    - name: Ping hosts in the group
+      ping:
 ####
 # setup ssh
 
@@ -10,6 +16,16 @@
 # install packages
 
 ####
+# install brew
+    - name: Install brew
+      include_tasks: Roles/install_brew.yaml
+      vars:
+        install_homebrew_if_missing: true
+
+# install brew packages
+    - name: Install brew packages
+      include_tasks: Roles/install_brew_packages.yaml   
+####
 # make folder directory
 
 ####
@@ -18,3 +34,4 @@
 ####
 # setup source virtualization
 
+#2212175

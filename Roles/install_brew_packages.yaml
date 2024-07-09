@@ -1,0 +1,9 @@
+- name: Updating Homebrew
+      homebrew:
+        update_homebrew: true
+
+- name: Upgrading Homebrew Packages
+  homebrew:
+    upgrade_all: "{{ upgrade_homebrew_packages }}"
+  register: result
+  until: result is successful
