@@ -1,7 +1,6 @@
 ---
 - name: playbook_update_and_upgrade_ubuntu.
   hosts: localhost
-  become: true
 
   tasks:
     - name: Ping hosts in the group
@@ -19,8 +18,12 @@
 # install brew
     - name: Install brew
       include_tasks: Roles/install_brew.yaml
-      vars:
-        install_homebrew_if_missing: true
+
+# homebrew tap repo
+    - name: Tap a Homebrew repository, state present
+      community.general.homebrew_tap:
+        name: "{{ homebrew_taps }}"
+        state: present
 
 # install brew packages
     - name: Install brew packages
@@ -33,5 +36,3 @@
 
 ####
 # setup source virtualization
-
-#2212175
