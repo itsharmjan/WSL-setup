@@ -1,9 +1,5 @@
----
 - name: Install packages
   ansible.builtin.package:
-    name: {{ item }}
+    name: "{{ apt_packages }}"
     state: present
-    loop:
-      - ansible
-      - wget
-      
+  become: true

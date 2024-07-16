@@ -11,3 +11,6 @@ brew_packages:
   - kustomize
   - kubie
   - helm
+
+apt_packages:
+  - wget

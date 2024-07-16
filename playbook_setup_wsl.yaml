@@ -13,6 +13,8 @@
 
 ####
 # install packages
+    - name: Install packages
+      include_tasks: Roles/install-packages.yaml
 
 ####
 # install brew
