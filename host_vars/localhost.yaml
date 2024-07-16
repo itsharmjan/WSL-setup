@@ -1,0 +1,13 @@
+---
+
+install_homebrew_if_missing: true
+upgrade_homebrew_packages: false
+
+homebrew_taps:
+  - hashicorp/tap
+
+brew_packages:
+  - hashicorp/tap/terraform
+  - kustomize
+  - kubie
+  - helm
