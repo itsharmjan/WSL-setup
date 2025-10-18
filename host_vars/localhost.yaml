@@ -11,6 +11,7 @@ brew_packages:
   - kustomize
   - kubie
   - helm
+  - k9s
 
 apt_packages:
   - wget
