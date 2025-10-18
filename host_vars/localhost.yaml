@@ -5,6 +5,7 @@ upgrade_homebrew_packages: false
 
 homebrew_taps:
   - hashicorp/tap
+  - fluxcd/tap
 
 brew_packages:
   - hashicorp/tap/terraform
@@ -12,6 +13,8 @@ brew_packages:
   - kubie
   - helm
   - k9s
+  - kubectl
+  - fluxcd/tap/flux
 
 apt_packages:
   - wget
