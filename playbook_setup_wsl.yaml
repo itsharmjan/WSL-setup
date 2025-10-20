@@ -42,5 +42,11 @@
 ####
 # get git directories
 
+    - name: Read-write git checkout from github
+      ansible.builtin.git:
+        repo: "{{ item.repo }}"
+        dest: "{{ item.folder }}"
+      loop: "{{ git_repo }}"
+
 ####
 # setup source virtualization
