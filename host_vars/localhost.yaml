@@ -2,6 +2,7 @@
 
 install_homebrew_if_missing: true
 upgrade_homebrew_packages: false
+install_ohmyzsh: false
 
 homebrew_taps:
   - hashicorp/tap

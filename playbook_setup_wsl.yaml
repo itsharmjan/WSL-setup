@@ -10,7 +10,9 @@
 
 ####
 # install oh-my-zsh
-
+    - name: Install ohmyzsh
+      include_tasks: Roles/ohmyzsh.yaml
+      when: install_ohmyzsh|bool == true
 
 ####
 # install packages
@@ -46,7 +48,12 @@
       ansible.builtin.git:
         repo: "{{ item.repo }}"
         dest: "{{ item.folder }}"
+        update: false
       loop: "{{ git_repo }}"
 
 ####
 # setup source virtualization
+
+    - name: Print the gateway for each host when defined
+      ansible.builtin.debug:
+        msg: Restart your shell to make changes active
