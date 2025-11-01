@@ -4,6 +4,8 @@ install_homebrew_if_missing: true
 upgrade_homebrew_packages: false
 install_ohmyzsh: false
 
+brew_path: /home/linuxbrew/.linuxbrew/bin/brew
+
 homebrew_taps:
   - hashicorp/tap
   - fluxcd/tap
