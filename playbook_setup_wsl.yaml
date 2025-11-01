@@ -9,12 +9,6 @@
 # setup ssh
 
 ####
-# install oh-my-zsh
-    - name: Install ohmyzsh
-      include_tasks: Roles/ohmyzsh.yaml
-      when: install_ohmyzsh|bool == true
-
-####
 # install packages
     - name: Install packages
       include_tasks: Roles/install-packages.yaml
