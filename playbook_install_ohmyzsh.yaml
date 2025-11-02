@@ -1,0 +1,67 @@
+---
+- name: playbook_update_and_upgrade_ubuntu.
+  hosts: localhost
+
+  tasks:
+    
+  - name: Install zsh
+    ansible.builtin.package:
+      name: zsh
+      state: present
+    become: true
+
+  - name: Set user shell to zsh
+    ansible.builtin.user:
+      name: "{{ lookup('env', 'USER') }}"
+      shell: /bin/zsh
+    become: true
+
+  - name: Download ohmyzsh
+    ansible.builtin.get_url:
+      url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+      dest: "{{ ansible_env.HOME }}/install.sh"
+      mode: '0755'
+
+  - name: Install ohmyzsh
+    ansible.builtin.script:
+      cmd: "{{ ansible_env.HOME }}/install.sh"
+    ignore_errors: True
+
+  - name: Install PowerLevel10K
+    ansible.builtin.git:
+      repo: https://github.com/romkatv/powerlevel10k.git
+      dest: "/home/{{ lookup('env', 'USER') }}/.oh-my-zsh/custom/themes/powerlevel10k"
+      depth: 1
+
+  - name: Download NerdFonts
+    ansible.builtin.get_url:
+      url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.3.3/Meslo.zip
+      dest: "/home/{{ lookup('env', 'USER') }}/Meslo.zip"
+
+  - name: Create temp directory
+    ansible.builtin.file:
+      path: "/home/{{ lookup('env', 'USER') }}/Meslo"
+      state: directory
+      mode: '0755'
+
+  - name: Install font files
+    ansible.builtin.unarchive:
+      src: "/home/{{ lookup('env', 'USER') }}/Meslo.zip"
+      dest: "/home/{{ lookup('env', 'USER') }}/Meslo"
+
+  - name: Move font files to fonts directory
+    ansible.builtin.copy:
+      src: "/home/{{ lookup('env', 'USER') }}/Meslo"
+      dest: /usr/share/fonts/Meslo
+      owner: root
+    become: true
+
+  - name: Update .zshrc
+    ansible.builtin.lineinfile:
+      path: "/home/{{ lookup('env', 'USER') }}/.zshrc"
+      insertafter: EOF
+      line: "source /home/{{ lookup('env', 'USER') }}/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme"
+
+  - name: Print the gateway for each host when defined
+    ansible.builtin.debug:
+      msg: Restart your shell to make changes active

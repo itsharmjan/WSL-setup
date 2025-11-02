@@ -2,15 +2,28 @@
 
 install_homebrew_if_missing: true
 upgrade_homebrew_packages: false
+install_ohmyzsh: false
+
+brew_path: /home/linuxbrew/.linuxbrew/bin/brew
 
 homebrew_taps:
   - hashicorp/tap
+  - fluxcd/tap
 
 brew_packages:
   - hashicorp/tap/terraform
   - kustomize
   - kubie
   - helm
+  - k9s
+  - kubectl
+  - fluxcd/tap/flux
 
 apt_packages:
   - wget
+
+git_repo:
+  - { folder: '~/workspace/Terraform', repo: 'git@github.com:itsharmjan/Terraform.git' }
+  - { folder: '~/workspace/Inventory', repo: 'git@github.com:itsharmjan/Inventory.git' }
+  - { folder: '~/workspace/Kubernetes', repo: 'git@github.com:itsharmjan/Kubernetes.git' }
+  - { folder: '~/workspace/Homelab', repo: 'git@github.com:itsharmjan/Homelab.git' }

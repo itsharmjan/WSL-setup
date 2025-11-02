@@ -9,10 +9,6 @@
 # setup ssh
 
 ####
-# install oh-my-zsh
-
-
-####
 # install packages
     - name: Install packages
       include_tasks: Roles/install-packages.yaml
@@ -34,8 +30,28 @@
 ####
 # make folder directory
 
+    - name: Create base folder directory
+      ansible.builtin.file:
+        path: ~/workspace
+        state: directory
+        mode: '0755'      
 ####
 # get git directories
 
+    - name: Read-write git checkout from github
+      ansible.builtin.git:
+        repo: "{{ item.repo }}"
+        dest: "{{ item.folder }}"
+        update: false
+      loop: "{{ git_repo }}"
+
 ####
 # setup source virtualization
+
+
+    - name: Ensure Homebrew shellenv is configured in .zshrc
+      ansible.builtin.lineinfile:
+        path: "/home/{{ lookup('env', 'USER') }}/.zshrc"
+        line: "alias k='kubectl'"
+        insertafter: EOF
+
