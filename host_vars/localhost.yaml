@@ -18,6 +18,7 @@ brew_packages:
   - k9s
   - kubectl
   - fluxcd/tap/flux
+  - siderolabs/tap/talosctl
 
 apt_packages:
   - wget
