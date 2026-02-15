@@ -1,0 +1,22 @@
+# make folder directory
+- name: Create base folder directory
+  ansible.builtin.file:
+    path: ~/workspace
+    state: directory
+    mode: '0755'   
+
+- name: Set personal Git user name
+  community.general.git_config:
+    scope: file
+    file: ~/.gitconfig
+    name: user.name
+    value: >-
+      {{ git_config_personal_name }}
+
+- name: Set personal Git user email
+  community.general.git_config:
+    scope: file
+    file: ~/.gitconfig
+    name: user.email
+    value: >-
+      {{ git_config_personal_email }}

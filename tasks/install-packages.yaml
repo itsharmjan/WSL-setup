@@ -1,0 +1,12 @@
+- name: Update and Upgrade System Packages
+  ansible.builtin.apt:
+    autoclean: true
+    autoremove: true
+    update_cache: true
+    upgrade: true
+
+- name: Install packages
+  ansible.builtin.package:
+    name: "{{ apt_packages }}"
+    state: present
+  become: true

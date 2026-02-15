@@ -15,13 +15,10 @@
       until: result is successful
       when: homebrew_check.stat.exists
 
-    # - name: Installing Homebrew Cask Packages
-    #   homebrew_cask:
-    #     name: "{{ brew_cask_packages }}"
-    #     state: present
-    #   register: result
-    #   until: result is successful
-    #   when: homebrew_check.stat.exists
+    - name: Tap a Homebrew repository, state present
+      community.general.homebrew_tap:
+        name: "{{ homebrew_taps }}"
+        state: present
 
     - name: Installing Homebrew Packages
       homebrew:

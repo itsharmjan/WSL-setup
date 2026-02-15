@@ -5,50 +5,23 @@
   tasks:
     - name: Ping hosts in the group
       ping:
-####
-# setup ssh
 
-####
-# install packages
+    - name: Setup ssh
+      ansible.builtin.include_tasks: tasks/setup_ssh.yaml
+
+    - name: Setup git
+      ansible.builtin.include_tasks: tasks/setup_ssh.yaml
+
     - name: Install packages
-      include_tasks: Roles/install-packages.yaml
+      ansible.builtin.include_tasks: tasks/install-packages.yaml
 
-####
-# install brew
     - name: Install brew
-      include_tasks: Roles/install_brew.yaml
+      ansible.builtin.include_tasks: tasks/install_brew.yaml
 
-# homebrew tap repo
-    - name: Tap a Homebrew repository, state present
-      community.general.homebrew_tap:
-        name: "{{ homebrew_taps }}"
-        state: present
-
-# install brew packages
     - name: Install brew packages
-      include_tasks: Roles/install_brew_packages.yaml   
-####
-# make folder directory
+      include_tasks: tasks/install_brew_packages.yaml   
 
-    - name: Create base folder directory
-      ansible.builtin.file:
-        path: ~/workspace
-        state: directory
-        mode: '0755'      
-####
-# get git directories
-
-    - name: Read-write git checkout from github
-      ansible.builtin.git:
-        repo: "{{ item.repo }}"
-        dest: "{{ item.folder }}"
-        update: false
-      loop: "{{ git_repo }}"
-
-####
 # setup source virtualization
-
-
     - name: Ensure Homebrew shellenv is configured in .zshrc
       ansible.builtin.lineinfile:
         path: "/home/{{ lookup('env', 'USER') }}/.zshrc"

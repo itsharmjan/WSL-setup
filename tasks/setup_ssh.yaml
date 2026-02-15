@@ -1,0 +1,18 @@
+---
+- name: Create .ssh Directory with Secure Permissions
+  ansible.builtin.file:
+    path: ~/.ssh
+    state: directory
+    mode: 0700
+
+- name: Create .ssh Directory with Secure Permissions
+  ansible.builtin.file:
+    path: ~/.ssh/tmp
+    state: directory
+    mode: 0700
+
+- name: Create SSH Config File from Template
+  ansible.builtin.template:
+    src: templates/ssh/config.yaml
+    dest: ~/.ssh/config
+    mode: 0640
