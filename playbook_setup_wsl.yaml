@@ -1,5 +1,5 @@
 ---
-- name: playbook_update_and_upgrade_ubuntu.
+- name: Playbook_update_and_upgrade_ubuntu.
   hosts: localhost
 
   tasks:
@@ -19,7 +19,7 @@
       ansible.builtin.include_tasks: tasks/install_brew.yaml
 
     - name: Install brew packages
-      include_tasks: tasks/install_brew_packages.yaml   
+      ansible.builtin.include_tasks: tasks/install_brew_packages.yaml
 
 # setup source virtualization
     - name: Ensure Homebrew shellenv is configured in .zshrc
@@ -27,4 +27,3 @@
         path: "/home/{{ lookup('env', 'USER') }}/.zshrc"
         line: "alias k='kubectl'"
         insertafter: EOF
-
