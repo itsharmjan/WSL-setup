@@ -4,13 +4,13 @@
 
   tasks:
     - name: Ping hosts in the group
-      ping:
+      ansible.builtin.ping:
 
     - name: Setup ssh
       ansible.builtin.include_tasks: tasks/setup_ssh.yaml
 
     - name: Setup git
-      ansible.builtin.include_tasks: tasks/setup_ssh.yaml
+      ansible.builtin.include_tasks: tasks/setup_git.yaml
 
     - name: Install packages
       ansible.builtin.include_tasks: tasks/install-packages.yaml
@@ -20,6 +20,9 @@
 
     - name: Install brew packages
       ansible.builtin.include_tasks: tasks/install_brew_packages.yaml
+
+    - name: Setup k9s plugins when using flux
+      ansible.builtin.include_tasks: tasks/setup_k9s.yaml
 
 # setup source virtualization
     - name: Ensure Homebrew shellenv is configured in .zshrc

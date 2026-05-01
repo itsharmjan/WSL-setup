@@ -1,4 +1,13 @@
 ---
+gitops_extention: fluxcd
+
+
+
+
+
+
+# ---------------------
+
 git_config_personal_name: !vault |
   $ANSIBLE_VAULT;1.2;AES256;homelab
   34643161383835323037633331373131623834376361613865663534336561303033623462313163
